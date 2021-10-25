@@ -22,6 +22,8 @@ int main(int argc, char* argv[]) //argc stores number of command line arguments 
 void mainMenu(string passfile, vector<password> &passwords)
 {
     readfile(passfile, passwords);
+    cout << "Initial state: " << endl;
+    getPasswords(passwords);
     for(int i = 0; i < passwords.size(); i++)
     {
         password currPass = passwords.at(i);
@@ -31,6 +33,7 @@ void mainMenu(string passfile, vector<password> &passwords)
             reductionLoop(passwords, i);
         }
     }
+    cout << "Final state: " << endl;
     getPasswords(passwords);
 }
 
