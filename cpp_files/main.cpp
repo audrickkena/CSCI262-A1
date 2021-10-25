@@ -35,6 +35,7 @@ void mainMenu(string passfile, vector<password> &passwords, vector<password*> &r
             rainbow.push_back(currPass);
         }
     }
+    getPasswords(passwords);
     sort(rainbow.begin(), rainbow.end(), rainbowSort);
     for(int i = 0; i < rainbow.size(); i++)
     {
