@@ -12,7 +12,7 @@ class password
 private:
     string data;
     string hash;
-    string finalHash;
+    string finalHash="";
     bool isUsed = false;
 public:
     password(string data);
