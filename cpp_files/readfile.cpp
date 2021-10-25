@@ -16,7 +16,6 @@ void readfile(string filename, vector<password> &passwords)
         password tempPass = password(temp);
         passwords.push_back(tempPass);
     }
-    cout << passwords.size() << endl;
     inData.close();
 }
 
