@@ -6,6 +6,7 @@
 #include "readfile.h"
 #include "password.h"
 #include "reduction.h"
+#include "writefile.h"
 
 using namespace std;
 
@@ -43,6 +44,8 @@ void mainMenu(string passfile, vector<password> &passwords, vector<password*> &r
         cout << " Password: " << (*(rainbow.at(i))).getPassword() << endl;
         cout << " final hash: " << (*(rainbow.at(i))).getFinalHash() << endl; 
     }
+    writefile(rainbow);
+    cout << "Number of line in Rainbow.txt: " << rainbow.size() << endl;
 }
 
 void reductionLoop(vector<password> &passwords, const int &startPos)
