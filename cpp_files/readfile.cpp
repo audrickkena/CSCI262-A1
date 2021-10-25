@@ -24,6 +24,8 @@ void getPasswords(vector<password> &passwords)
 {
     for(int i = 0; i < passwords.size(); i++)
     {
-        cout << "Password at " << i + 1 << " is " << passwords.at(i).getPassword() << " and the hash is: " << passwords.at(i).getHash() << endl;
+        cout << "Password at " << i + 1 << " is " << passwords.at(i).getPassword() << endl; 
+        cout << " and the hash is: " << passwords.at(i).getHash() << endl;
+        cout << " with a final hash of: " << passwords.at(i).getFinalHash() << endl << endl << endl;
     }
 }
