@@ -9,7 +9,7 @@
 
 using namespace std;
 
-void mainMenu(string passfile, vector<password> &passwords);
+void mainMenu(string passfile, vector<password> &passwords, vector<password*> &rainbow);
 void reductionLoop(vector<password> &passwords, const int &startPos);
 bool rainbowSort(password* p1, password* p2);
 
