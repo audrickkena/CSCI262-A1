@@ -15,26 +15,31 @@ int main(int argc, char* argv[]) //argc stores number of command line arguments 
 {
     string passfile = argv[1]; //argv[1] is the first argument passed when running .\Rainbow {arg1,...} as argv[0] is reserved for the name of the executable
     vector<password> passwords;
+    vector<password*> rainbow;
     mainMenu(passfile, passwords);
     return 0;
 }
 
-void mainMenu(string passfile, vector<password> &passwords)
+void mainMenu(string passfile, vector<password> &passwords, vector<password*> &rainbow)
 {
     readfile(passfile, passwords);
-    cout << "Initial state: " << endl;
-    getPasswords(passwords);
     for(int i = 0; i < passwords.size(); i++)
     {
         password* currPass = &passwords.at(i);
         if((*currPass).getIsUsed() == false)
         {
             (*currPass).setIsUsed(true);
-            reductionLoop(passwords, i); 
+            reductionLoop(passwords, i);
+            rainbow.push_back(currPass);
         }
     }
-    cout << "Final state: " << endl;
-    getPasswords(passwords);
+    sort(rainbow.begin(), rainbow.end(), rainbowSort);
+    for(int i = 0; i < rainbow.size(); i++)
+    {
+        cout << "Rainbow elem " << i << ":" << endl;
+        cout << " Password: " << (*(rainbow.at(i))).getPassword() << endl;
+        cout << " final hash: " << (*(rainbow.at(i))).getFinalHash() << endl; 
+    }
 }
 
 void reductionLoop(vector<password> &passwords, const int &startPos)
@@ -49,4 +54,9 @@ void reductionLoop(vector<password> &passwords, const int &startPos)
         finalHash = passwords.at(currPos).getHash();
     }
     passwords.at(startPos).setFinalHash(finalHash);
+}
+
+bool rainbowSort(password* p1, password* p2)
+{
+    return ((*p1).getFinalHash() < (*p2).getFinalHash()); 
 }
