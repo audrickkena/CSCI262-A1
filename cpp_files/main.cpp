@@ -41,7 +41,7 @@ void reductionLoop(vector<password> &passwords, const int &startPos)
 {
     string finalHash;
     int currPos = startPos;
-    for(int j = 0; j < 4; j++)
+    for(int j = 0; j < 1; j++)
     {
         password currPass = passwords.at(currPos);
         if(currPass.getIsUsed() == false)
