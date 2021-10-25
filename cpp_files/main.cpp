@@ -27,7 +27,6 @@ void mainMenu(string passfile, vector<password> &passwords)
     for(int i = 0; i < passwords.size(); i++)
     {
         password* currPass = &passwords.at(i);
-        cout << "Isused: " << (*currPass).getIsUsed() << endl;
         if((*currPass).getIsUsed() == false)
         {
             (*currPass).setIsUsed(true);
@@ -42,7 +41,7 @@ void reductionLoop(vector<password> &passwords, const int &startPos)
 {
     string finalHash;
     int currPos = startPos;
-    for(int j = 0; j < 1; j++)
+    for(int j = 0; j < 4; j++)
     {
         password* currPass = &passwords.at(currPos);
         currPos = reduceHash((*currPass).getHash(), passwords.size());
