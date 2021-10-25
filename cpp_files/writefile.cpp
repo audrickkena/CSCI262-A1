@@ -13,6 +13,6 @@ void writefile(const vector<password*> &rainbow)
     {
         outData << (*rainbow.at(i)).getPassword() << "," << (*rainbow.at(i)).getFinalHash() << endl;
     }
-    outData << (*rainbow.at(rainbow.size())).getPassword() << "," << (*rainbow.at(rainbow.size())).getFinalHash();
+    outData << (*rainbow.at(rainbow.size() - 1)).getPassword() << "," << (*rainbow.at(rainbow.size() - 1)).getFinalHash();
     outData.close();
 }
