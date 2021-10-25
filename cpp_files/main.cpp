@@ -10,6 +10,7 @@ using namespace std;
 
 void mainMenu(string passfile, vector<password> &passwords);
 void reductionLoop(vector<password> &passwords, const int &startPos);
+bool rainbowSort(password* p1, password* p2);
 
 int main(int argc, char* argv[]) //argc stores number of command line arguments while argv[] is an array of char pointers of the arguments
 {
