@@ -1,12 +1,11 @@
 #include <iostream>
 #include <fstream>
-#include <string>
-#include <vector>
 #include <iomanip>
 
+#include "readfile.h"
 using namespace std;
 
-void readfile(string filename, vector<string> &passwords)
+void readfile(string filename, vector<password> &passwords)
 {
     ifstream inData;
     inData.open(filename);
@@ -14,16 +13,17 @@ void readfile(string filename, vector<string> &passwords)
 
     while(getline(inData, temp))
     {
-        passwords.push_back(temp);
+        password tempPass = password(temp);
+        passwords.push_back(tempPass);
     }
     cout << passwords.size() << endl;
     inData.close();
 }
 
-void getPasswords(vector<string> &passwords)
+void getPasswords(vector<password> &passwords)
 {
     for(int i = 0; i < passwords.size(); i++)
     {
-        cout << "Password at " << i + 1 << " is " << passwords.at(i) << endl;
+        cout << "Password at " << i + 1 << " is " << passwords.at(i).getPassword() << " and the has is: " << passwords.at(i).getHash() << endl;
     }
 }
