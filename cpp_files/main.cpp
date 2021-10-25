@@ -4,6 +4,7 @@
 #include <algorithm>
 #include <ios> //used to get stream size
 #include <limits> //used to get numeric limits
+#include <regex> //used to get regex
 
 #include "readfile.h"
 #include "password.h"
@@ -16,6 +17,9 @@ void mainMenu(const string &passfile, vector<password> &passwords, vector<passwo
 void reductionLoop(vector<password> &passwords, const int &startPos);
 bool rainbowSort(password* p1, password* p2);
 int isHashInRainbow(const string &hashVal, const vector<password*> &rainbow);
+int rainbowHashReduction(vector<password> &passwords, const int &startPos, string userHash);
+int rainbowReduction(vector<password> &passwords, vector<password*> &rainbow, int rainbowPos, string userHash);
+bool isUserHashValid(string &userHash);
 
 int main(int argc, char* argv[]) //argc stores number of command line arguments while argv[] is an array of char pointers of the arguments
 {
@@ -39,14 +43,19 @@ void mainMenu(const string &passfile, vector<password> &passwords, vector<passwo
             rainbow.push_back(currPass);
         }
     }
-    // getPasswords(passwords); - for displaying all passwords
+    // getPasswords(passwords); 
+    // - for displaying all passwords
+
     sort(rainbow.begin(), rainbow.end(), rainbowSort);
+
     // for(int i = 0; i < rainbow.size(); i++)
     // {
     //     cout << "Rainbow elem " << i << ":" << endl;
     //     cout << " Password: " << (*(rainbow.at(i))).getPassword() << endl;
     //     cout << " final hash: " << (*(rainbow.at(i))).getFinalHash() << endl; 
-    // } for displaying all records in rainbow vector
+    // } 
+    // - for displaying all records in rainbow vector
+    
     writefile(rainbow);
     string userHash;
     string userPreImage;
@@ -54,7 +63,12 @@ void mainMenu(const string &passfile, vector<password> &passwords, vector<passwo
     cout << endl << endl << "Please enter a hash value to process: ";
     cin >> userHash;
     cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
-    //TODO: Check if input is valid
+    while(isUserHashValid(userHash) == false)
+    {
+        cout << "The hash value you entered is not valid. Please try again (Hash value): ";
+        cin >> userHash;
+        cin.ignore(numeric_limits<streamsize>::max(), '\n'); // clear buffer
+    }
     int searchRes = isHashInRainbow(userHash, rainbow);
     int searchCount = 0;
     string tempHash = userHash;
@@ -70,6 +84,10 @@ void mainMenu(const string &passfile, vector<password> &passwords, vector<passwo
         if(rainbowRes != -1)
         {
             cout << "The preimage of the hash(" << userHash << ") is: " << passwords.at(rainbowRes).getPassword() << endl;
+        }
+        else
+        {
+            cout << "Sorry but the preimage of the hash(" << userHash << ") cannot be found." << endl;
         }
     }
     else //if the userHash or a reduction of it doesn't exist
@@ -149,4 +167,28 @@ int rainbowReduction(vector<password> &passwords, vector<password*> &rainbow, in
         }
     }
     return -1;
+}
+
+bool isUserHashValid(string &userHash)
+{
+    string lowerHash;
+    regex checkUpper("[A-Z]+");
+    for(int i = 0; i < userHash.length(); i++)
+    {
+        if(regex_match(userHash.substr(i, 1), checkUpper))
+        {
+            lowerHash += tolower(userHash[i]);
+        }
+        else
+        {
+            lowerHash += userHash[i];
+        }
+    }
+    userHash = lowerHash;
+    regex strExpr("([a-f]|[0-9])+");
+    if(regex_match(userHash, strExpr) && userHash.length() == 32)
+    {
+        return true;
+    }
+    return false;
 }
