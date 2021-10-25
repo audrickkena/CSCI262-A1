@@ -26,10 +26,10 @@ void mainMenu(string passfile, vector<password> &passwords)
     getPasswords(passwords);
     for(int i = 0; i < passwords.size(); i++)
     {
-        password currPass = passwords.at(i);
-        if(currPass.getIsUsed() == false)
+        password* currPass = &passwords.at(i);
+        if((*currPass).getIsUsed() == false)
         {
-            currPass.setIsUsed(true);
+            (*currPass).setIsUsed(true);
             reductionLoop(passwords, i);
         }
     }
@@ -43,12 +43,12 @@ void reductionLoop(vector<password> &passwords, const int &startPos)
     int currPos = startPos;
     for(int j = 0; j < 1; j++)
     {
-        password currPass = passwords.at(currPos);
-        if(currPass.getIsUsed() == false)
+        password* currPass = &passwords.at(currPos);
+        if((*currPass).getIsUsed() == false)
         {
-            currPass.setIsUsed(true);
+            (*currPass).setIsUsed(true);
         }
-        currPos = reduceHash(currPass.getHash(), passwords.size());
+        currPos = reduceHash((*currPass).getHash(), passwords.size());
         finalHash = passwords.at(currPos).getHash();
     }
     passwords.at(startPos).setFinalHash(finalHash);
