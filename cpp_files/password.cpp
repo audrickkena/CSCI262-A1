@@ -2,10 +2,11 @@
 
 using namespace std;
 
-password::password(string data)
+password::password(string data, int pos)
 {
     this->data = data;
     this->hash = md5(data);
+    this->pos = pos;
 }
 
 string password::getPassword()
@@ -28,6 +29,11 @@ bool password::getIsUsed()
     return this->isUsed;
 }
 
+int password::getPos()
+{
+    return this->pos;
+}
+
 void password::setPassword(string data)
 {
     this->data = data;
@@ -46,6 +52,11 @@ void password::setFinalHash(string finalHash)
 void password::setIsUsed(bool isUsed)
 {
     this->isUsed = isUsed;
+}
+
+void password::setPos(int pos)
+{
+    this->pos = pos;
 }
 
 // password::~password()

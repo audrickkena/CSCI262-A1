@@ -13,7 +13,7 @@ void readfile(string filename, vector<password> &passwords)
 
     while(getline(inData, temp))
     {
-        password tempPass = password(temp);
+        password tempPass = password(temp, passwords.size());
         passwords.push_back(tempPass);
     }
     inData.close();
