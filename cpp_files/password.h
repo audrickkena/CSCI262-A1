@@ -16,4 +16,12 @@ public:
     password(string data);
     password(){};
     // ~password();
+    string getPassword();
+    string getHash();
+    string getFinalHash();
+    bool getIsUsed();
+    void setPassword(string data);
+    void setHash(string hash);
+    void setFinalHash(string finalHash);
+    void setIsUsed(bool isUsed);
 };
