@@ -27,11 +27,11 @@ void mainMenu(string passfile, vector<password> &passwords)
     for(int i = 0; i < passwords.size(); i++)
     {
         password* currPass = &passwords.at(i);
-        cout << "Isused: " << (*currPass) << endl;
+        cout << "Isused: " << currPass << endl;
         if((*currPass).getIsUsed() == false)
         {
             (*currPass).setIsUsed(true);
-            reductionLoop(passwords, i);
+            reductionLoop(passwords, i); 
         }
     }
     cout << "Final state: " << endl;
