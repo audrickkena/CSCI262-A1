@@ -31,7 +31,7 @@ long hashToLong(const string &hash)
         {
             tempVal = hash[i] - '0';
         }
-        tempVal *= pow(16, 7);
+        tempVal *= pow(16, 7 - i);
         result += tempVal;
     }
     return result;

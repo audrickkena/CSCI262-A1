@@ -43,7 +43,7 @@ void mainMenu(const string &passfile, vector<password> &passwords, vector<passwo
             rainbow.push_back(currPass);
         }
     }
-    // getPasswords(passwords); 
+    getPasswords(passwords); 
     // - for displaying all passwords
 
     sort(rainbow.begin(), rainbow.end(), rainbowSort);
