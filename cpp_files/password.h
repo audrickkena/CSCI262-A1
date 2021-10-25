@@ -2,6 +2,8 @@
 #include <vector>
 
 #include "md5.h" 
+#ifndef PASSWORD
+#define PASSWORD
 
 using namespace std;
 
@@ -25,3 +27,4 @@ public:
     void setFinalHash(string finalHash);
     void setIsUsed(bool isUsed);
 };
+#endif 
