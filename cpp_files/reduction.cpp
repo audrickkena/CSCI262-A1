@@ -7,14 +7,14 @@ using namespace std;
 long hashToLong(const string &hash);
 long alphaToNum(const char &chr);
 
-long reduceHash(const string &hash)
+long reduceHash(const string &hash, const int &len)
 {
     unsigned long reduced;
     for(int i = 0; i < 4; i++)
     {
         reduced += hashToLong(hash.substr((i*8), 8));
     }
-    return reduced;
+    return reduced%len;
 }
 
 long hashToLong(const string &hash)
