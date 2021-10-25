@@ -36,14 +36,14 @@ void mainMenu(string passfile, vector<password> &passwords, vector<password*> &r
             rainbow.push_back(currPass);
         }
     }
-    getPasswords(passwords);
+    // getPasswords(passwords); - for displaying all passwords
     sort(rainbow.begin(), rainbow.end(), rainbowSort);
-    for(int i = 0; i < rainbow.size(); i++)
-    {
-        cout << "Rainbow elem " << i << ":" << endl;
-        cout << " Password: " << (*(rainbow.at(i))).getPassword() << endl;
-        cout << " final hash: " << (*(rainbow.at(i))).getFinalHash() << endl; 
-    }
+    // for(int i = 0; i < rainbow.size(); i++)
+    // {
+    //     cout << "Rainbow elem " << i << ":" << endl;
+    //     cout << " Password: " << (*(rainbow.at(i))).getPassword() << endl;
+    //     cout << " final hash: " << (*(rainbow.at(i))).getFinalHash() << endl; 
+    // } for displaying all records in rainbow vector
     writefile(rainbow);
     cout << "Number of line in Rainbow.txt: " << rainbow.size() << endl;
 }
